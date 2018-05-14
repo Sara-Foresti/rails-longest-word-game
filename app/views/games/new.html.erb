@@ -1,0 +1,23 @@
+<!-- <h1>Games#new</h1> -->
+<!-- <p>Find me in app/views/games/new.html.erb</p> -->
+<div class="container text-center">
+  <h2>Find the longest word out of these letters</h2>
+  <div class="letter-grid">
+    <% @letters.each do |letter| %>
+      <p><%= letter %></p>
+    <% end %>
+  </div>
+  <div class="guess-form">
+    <form action="/score" method="post" class="form-inline">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <!-- what does this do? protection from hackers injecting in form -->
+      <!-- it generates this html: <input type="hidden" name="authenticity_token" id="authenticity_token" value="XNIG4GXPpqA59h679lWTNBWMXW39NABhUspcOQI6+TuAM+ETci4NgPfNXq5LqlDzJD/A8gtVE2063sv5Yiunxw=="> -->
+      <input type="hidden" name="letters" value="<%= @letters.join() %>">
+      <!-- we want to get the letters the user have seen as an input of the form, but we hide them -->
+      <div class="form-group">
+        <input type="text" name="guess" placeholder="Write you guess here" class="form-control">
+        <input type="submit" value="Play" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+</div>
